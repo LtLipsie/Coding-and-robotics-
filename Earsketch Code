@@ -1,0 +1,22 @@
+from earsketch import *
+
+init()
+setTempo(120)
+
+setEffect(1, DISTORTION, DISTO_GAIN, 20, 1)
+
+drums = CIARA_MELANIN_DRUMBEAT_2
+
+fitMedia(drums, 1, 1, 31)
+
+drum2 = CIARA_SET_THEME_MELSYNTH
+
+
+
+beat = "0++0++++0-000++0"
+
+for measure in range(1, 31, 2):
+
+  makeBeat(drum2, 2, measure, beat)
+
+finish()

@@ -1,0 +1,62 @@
+#include <Servo.h>
+Servo myservo;  
+int pos = 0;  
+const int pingPin = A0;
+float duration;
+float ping_inches;
+float ping_cm;
+float distance;
+
+void setup() 
+{
+  myservo.attach(11);
+  delay(100);
+  myservo.write(pos);
+  Serial.begin (9600);
+  
+}
+
+void ping() {
+
+  pinMode(pingPin, OUTPUT);
+  digitalWrite(pingPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(pingPin, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(pingPin, LOW);
+
+
+  pinMode(pingPin, INPUT);
+  duration = pulseIn(pingPin, HIGH);
+
+
+  ping_cm = duration / 29 / 2;
+ 
+}
+
+void loop() 
+{
+
+  ping();
+  Serial.println (ping_cm);
+  if (ping_cm < 50)
+  {
+   ping();
+    Serial.println (ping_cm);
+    myservo.write(pos+85);
+    delay(100);
+    Serial.println ("if ");
+    
+  }
+  else 
+  {
+    
+   ping();
+    Serial.println (ping_cm);
+    myservo.write(pos-85);
+    delay(100);
+    Serial.println ("else ");
+  }
+  delay(300);
+}
+
